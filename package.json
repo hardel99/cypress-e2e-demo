@@ -1,5 +1,11 @@
 {
-  "dependencies": {
-    "cypress": "^12.7.0"
+  "scripts": {
+    "cypress:test": "cypress run --spec cypress/e2e/*.feature"
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "cypress": "^12.7.0",
+    "esbuild": "^0.17.11"
   }
 }
