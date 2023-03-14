@@ -7,13 +7,13 @@ This project is a working demo on how to configure cypress to run with a BDD fra
 Clone the repo:
 
 ```git
-git clone 'placeholder'
+git clone git@github.com:hardel99/cypress-e2e-demo.git
 ```
 
 Install all dependencies:
 
 ```shell
-cd 'repository-name'
+cd 'cypress-e2e-demo'
 npm install
 ```
 
