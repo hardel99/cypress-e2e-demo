@@ -18,6 +18,7 @@ module.exports = defineConfig({
         baseUrl: "https://automationexercise.com/",
         specPattern: "cypress/e2e/*.feature",
         viewportWidth: 1920,
-        viewportHeight: 1080
+        viewportHeight: 1080,
+        defaultCommandTimeout: 5000,
     },
 });

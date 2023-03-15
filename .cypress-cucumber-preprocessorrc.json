@@ -1,7 +1,7 @@
 {
     "json": {
-        "enabled": false,
-        "output": "report/result.json"
+        "enabled": true,
+        "output": "report/result.html"
     },
     "stepDefinitions": [
         "[filepath]/**/*.{js,ts}",
