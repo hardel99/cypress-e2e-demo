@@ -76,7 +76,7 @@ When('Login', () => {
 });
 
 Then('Delete account', () => {
-    cy.get('a[href="/delete_account]').should('be.visible').and('include.text', 'Delete Account');
+    cy.get('a[href="/delete_account"]').should('be.visible').and('include.text', 'Delete Account').click();
     cy.get('h2.title.text-center').should('be.visible').and(($el) => {
         expect($el.text().toLowerCase()).to.eq('ACCOUNT DELETED!'.toLowerCase());
     });
