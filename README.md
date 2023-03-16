@@ -7,7 +7,7 @@ This project is a working demo on how to configure cypress to run with a BDD fra
 Clone the repo:
 
 ```git
-git clone git@github.com:hardel99/cypress-e2e-demo.git
+git clone https://github.com/hardel99/cypress-e2e-demo.git
 ```
 
 Install all dependencies:

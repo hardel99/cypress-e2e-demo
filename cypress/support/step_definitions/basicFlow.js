@@ -1,49 +1,38 @@
 ///<reference types="cypress"/>
 
 import { When, Then, Given } from "@badeball/cypress-cucumber-preprocessor";
+import createAccount from "../pages/CreateAccount";
+import homePage from "../pages/HomePage";
+import login from "../pages/Login";
 
 Given('I navigate to the Website', () => {
-    cy.visit("/");
+    cy.visit('/');
 });
 
-When('Website Home Page is visible', () => {
+When('Application Home Page is visible', () => {
     //valdiate home page elements
 });
 
-Then('Signup and create a new user', () => {
-    cy.contains(' Signup / Login').click();
-    cy.get('.signup-form > h2').should('be.visible').and('have.text', 'New User Signup!');
-    cy.get('[data-qa="signup-name"]').type('user-test');
-    cy.get('[data-qa="signup-email"]').type('user@email.com');
-    cy.get('[data-qa="signup-button"]').click();
+Then('Signup and create a new user with {string} and {string}', (user, email) => {
+    homePage.navigateToLoginPage();
+    login.signup(user, email);
 });
 
-Then('I fill account details', () => {
-    cy.get('h2.title.text-center').should('be.visible').and('include.text', 'Enter Account Information');
-    cy.get('[data-qa="name"]').should('have.value', 'user-test');
-    cy.get('[data-qa="email"]').should('have.value', 'user@email.com');
-    cy.get('#id_gender1').click();
-    cy.get('[data-qa="password"]').type('password');
-    cy.get('[data-qa="days"]').select('2');
-    cy.get('[data-qa="months"]').select('February');
-    cy.get('[data-qa="years"]').select('1999');
-    cy.get('#newsletter').click();
-    cy.get('#newsletter').should('be.checked');
-    cy.get('#optin').click();
-    cy.get('#optin').should('be.checked');
+Then('I fill account details with {string}, {string}, {string}, {string} and {string}', (title, user, email, password, dob) => {
+    createAccount.fillSignupDetails(title, user, email, password, dob);
 });
 
-Then('I fill address information', () => {
-    cy.get('[data-qa="first_name"]').type('testFN');
-    cy.get('[data-qa="last_name"]').type('testLN');
-    cy.get('[data-qa="company"]').type('RAVN');
-    cy.get('[data-qa="address"]').type('Address Line 1');
-    cy.get('[data-qa="address2"]').type('Address Line 2');
-    cy.get('[data-qa="country"]').select('United States');
-    cy.get('[data-qa="state"]').type('NY');
-    cy.get('[data-qa="city"]').type('Idw any big city');
-    cy.get('[data-qa="zipcode"]').type('33195');
-    cy.get('[data-qa="mobile_number"]').type('9856541234');
+Then('I fill address information with {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}', (firstName, lastName, company, addressLine1, addressLine2, country, state, city, zipCode, mobileNumber) => {
+    cy.get('[data-qa="first_name"]').type(firstName);
+    cy.get('[data-qa="last_name"]').type(lastName);
+    cy.get('[data-qa="company"]').type(company);
+    cy.get('[data-qa="address"]').type(addressLine1);
+    cy.get('[data-qa="address2"]').type(addressLine2);
+    cy.get('[data-qa="country"]').select(country);
+    cy.get('[data-qa="state"]').type(state);
+    cy.get('[data-qa="city"]').type(city);
+    cy.get('[data-qa="zipcode"]').type(zipCode);
+    cy.get('[data-qa="mobile_number"]').type(mobileNumber);
 });
 
 When('Click Create account', () => {
@@ -59,9 +48,9 @@ Then('Verify account is created successfully', () => {
     //verify it redirects me to home page
 });
 
-Then('Verify user is logued in', () => {
+Then('Verify user is logued in as {string}', (user) => {
     let userName = 'user-test';
-    cy.contains('Logged in as').should('be.visible').and('include.text', `Logged in as ${userName}`);
+    cy.contains('Logged in as').should('be.visible').and('include.text', `Logged in as ${user}`);
 });
 
 Then('Logout', () => {
@@ -69,9 +58,9 @@ Then('Logout', () => {
     cy.get('.login-form > h2').should('be.visible').and('have.text', 'Login to your account');
 });
 
-When('Login', () => {
-    cy.get('[data-qa="login-email"]').type('user@email.com');
-    cy.get('[data-qa="login-password"]').type('password');
+When('Login with "<email>" and "<password>"', (email, password) => {
+    cy.get('[data-qa="login-email"]').type(email);
+    cy.get('[data-qa="login-password"]').type(password);
     cy.get('[data-qa="login-button"]').click();
 });
 

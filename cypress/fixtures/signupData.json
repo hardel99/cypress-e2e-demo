@@ -1,0 +1,15 @@
+{
+  "name": "user-test",
+  "title": "mr",
+  "email": "user-test@rvn.com",
+  "password": "passw0rd",
+  "birthday": "1999-02-22",
+  "address": {
+    "line1": "",
+    "line2": "",
+    "country": "",
+    "state": "",
+    "city": "",
+    "zipcode": ""
+  }
+}

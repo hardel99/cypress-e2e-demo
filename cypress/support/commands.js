@@ -24,6 +24,23 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('assertElementPrescence', (cssLocator) => {
-    cy.get(cssLocator).should('be.visible')
+Cypress.Commands.add('selectFromDropdown', (locator, option) => {
+    cy.get(locator).select(option);
+});
+
+Cypress.Commands.add('typeIntoField', (locator, text) => {
+    cy.get(locator).type(text);
+});
+
+Cypress.Commands.add('checkElement', (locator) => {
+    cy.get(locator).check();
+    cy.get(locator).should('be.checked');
+});
+
+Cypress.Commands.add('verifyFieldValue', (locator, value) => {
+    cy.get(locator).should('have.value', value).and('be.visible');
+});
+
+Cypress.Commands.add('verifyElementText', (locator, text) => {
+    cy.get(locator).should('include.text', text).and('be.visible');
 });

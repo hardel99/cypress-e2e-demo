@@ -1,7 +1,12 @@
 ///<reference types="cypress" />
 
-class homePage {
-    get logo() { return "a > img" };
+class HomePage {
+    get logo() { return 'a > img' };
+    get login_link() { return 'Signup / Login'};
+
+    navigateToLoginPage() {
+        cy.contains(this.login_link).click();
+    }
 }
 
-export default new homePage;
+export default new HomePage;
