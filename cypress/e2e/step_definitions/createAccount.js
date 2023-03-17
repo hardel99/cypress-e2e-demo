@@ -1,10 +1,10 @@
 ///<reference types="cypress"/>
 
 import { When, Then, Given } from "@badeball/cypress-cucumber-preprocessor";
-import confirmAccount from "../pages/ConfirmAccount";
-import createAccount from "../pages/CreateAccount";
-import homePage from "../pages/HomePage";
-import login from "../pages/Login";
+import confirmAccount from "../../support/pages/ConfirmAccount";
+import createAccount from "../../support/pages/CreateAccount";
+import homePage from "../../support/pages/HomePage";
+import login from "../../support/pages/Login";
 
 Given('I navigate to the Website', () => {
     cy.visit('/');
