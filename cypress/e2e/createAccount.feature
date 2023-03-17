@@ -1,7 +1,8 @@
-Feature: Basic Flow
-    
+Feature: Create Account
+    """
     As a new user I want to be able to see products and menus of Home Page, 
     I must be also able to create an account, login with the new account and delete it
+    """
 
 Background:
     Given I navigate to the Website
@@ -14,6 +15,7 @@ Scenario: Create a new account, login and delete it
     Then I fill address information with "<firstName>", "<lastName>", "<company>", "<addressLine1>", "<addressLine2>", "<country>", "<state>", "<city>", "<zipCode>" and "<mobileNumber>"
     When Click Create account
     Then Verify account is created successfully
+    When Application Home Page is visible
     Then Verify user is logued in as "<user>"
     Then Logout
     When Login with "<email>" and "<password>"

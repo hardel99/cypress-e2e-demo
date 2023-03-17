@@ -1,3 +1,4 @@
+///<reference types="cypress"/>
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -23,6 +24,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('clickElement', (locator) => {
+    cy.get(locator).click();
+});
+
+Cypress.Commands.add('clickElementByText', (locator) => {
+    cy.contains(locator).click();
+});
+
+Cypress.Commands.add('clickAndValidateElement', (locator) => {
+    cy.get(locator).should('be.visible').click();
+});
+
+Cypress.Commands.add('clickandValidateElementByText', (locator, text) => {
+    cy.contains(locator).should('be.visible').and('be.enabled').and('include.text', text).click();
+});
 
 Cypress.Commands.add('selectFromDropdown', (locator, option) => {
     cy.get(locator).select(option);
@@ -37,10 +53,39 @@ Cypress.Commands.add('checkElement', (locator) => {
     cy.get(locator).should('be.checked');
 });
 
+Cypress.Commands.add('verifyElementExist', (locator) => {
+    cy.get(locator).should('exist').and('be.visible');
+});
+
+Cypress.Commands.add('verifyElementExistByText', (locator) => {
+    cy.contains(locator).should('exist').and('be.visible');
+});
+
 Cypress.Commands.add('verifyFieldValue', (locator, value) => {
     cy.get(locator).should('have.value', value).and('be.visible');
 });
 
-Cypress.Commands.add('verifyElementText', (locator, text) => {
-    cy.get(locator).should('include.text', text).and('be.visible');
+Cypress.Commands.add('verifyElementText', (locator, text, ignoreCases=false) => {
+    if(ignoreCases) {
+        cy.get(locator).should('be.visible').then($el => {
+            expect($el.text().toLowerCase()).to.eq(text.toLowerCase());
+        });
+    } else{
+        cy.get(locator).should('include.text', text).and('be.visible');
+    }
+});
+
+Cypress.Commands.add('verifyElementTextByContains', (locator, text, ignoreCases=false) => {
+    if(ignoreCases) {
+        cy.contains(locator).should('be.visible').then($el => {
+            expect($el.text().toLowerCase()).to.eq(text.toLowerCase());
+        });
+    } else{
+        cy.contains(locator).should('include.text', text).and('be.visible');
+    }
+});
+
+Cypress.Commands.add('verifyURLIncludes', (endpoint = '') => {
+    const url = Cypress.config('baseUrl') + endpoint;
+    cy.url().should('eq', url);
 });

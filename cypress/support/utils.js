@@ -14,6 +14,34 @@ class Utils {
         }
         return result;
     }
+
+    parseStringToDate(dateString, dateFormat = 'yyyy/mm/dd') {
+        const splittedValues = dateString.split(/[-|\/]/g);
+        
+        let dayIndex, monthIndex, yearIndex;
+
+        switch(dateFormat.toLowerCase()) {
+            case 'yyyy/mm/dd':
+                dayIndex = 2; monthIndex = 1; yearIndex = 0;
+                break;
+            case 'dd/mm/yyyy':
+                dayIndex = 0; monthIndex = 1; yearIndex = 2;
+                break;
+            case 'mm/dd/yyyy':
+                dayIndex = 1; monthIndex = 0; yearIndex = 2;
+                break;
+            default:
+                throw new Error('Please provide a valid date format');
+        }
+
+        const date = {
+            day: splittedValues[dayIndex],
+            month: splittedValues[monthIndex],
+            year: splittedValues[yearIndex]
+        };
+
+        return date;
+    }
 }
 
 export default new Utils;
