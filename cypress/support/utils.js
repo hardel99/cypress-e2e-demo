@@ -36,7 +36,7 @@ class Utils {
 
         const date = {
             day: splittedValues[dayIndex],
-            month: splittedValues[monthIndex],
+            month: Number(splittedValues[monthIndex]),
             year: splittedValues[yearIndex]
         };
 

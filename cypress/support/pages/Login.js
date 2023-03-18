@@ -11,6 +11,8 @@ class Login {
     get signupNameField() { return utils.useDataQaProperty('signup-name') }
     get signupEmailField() { return utils.useDataQaProperty('signup-email') }
     get signupBtn() { return utils.useDataQaProperty('signup-button') }
+    get loginErrorMessage() { return '.login-form p' }
+    get signupErrorMessage() { return '.signup-form p' }
 
 
     login(email, password) {
@@ -25,13 +27,20 @@ class Login {
         cy.typeIntoField(this.signupNameField, user);
         cy.typeIntoField(this.signupEmailField, email);
         cy.clickAndValidateElement(this.signupBtn);
-        cy.verifyURLIncludes('signup');
     }
 
-    validateUserIsInLoginScreen() {
-        cy.verifyURLIncludes('login');
+    validateUserIsInLoginScreen(shouldFail = false) {
+        cy.verifyURLIncludes(`${shouldFail ? 'signup':'login'}`);
         cy.verifyElementText(this.loginTitle, 'Login to your account');
         cy.verifyElementText(this.signupTitle, 'New User Signup!');
+    }
+
+    validateLoginErrorMessage() {
+        cy.verifyElementText(this.loginErrorMessage, 'Your email or password is incorrect!');
+    }
+
+    validateSignupErrorMessage() {
+        cy.verifyElementText(this.signupErrorMessage, 'Email Address already exist!');
     }
 }
 

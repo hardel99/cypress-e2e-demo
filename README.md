@@ -17,6 +17,8 @@ cd 'cypress-e2e-demo'
 npm install
 ```
 
+Finally, to enable reporting, go to [cucumber-json-formatter](https://github.com/cucumber/json-formatter) repository and download the executable respecting to your OS, rename it as the [README.md of the repository](https://github.com/cucumber/json-formatter/README.md) indicates and put it on root project level (see [Project structure](https://github.com/hardel99/cypress-e2e-demo#project-structure) section to see how your repo should be structured)
+
 ### Quickstart
 
 To start running cypress tests we have 2 main options:
@@ -29,13 +31,15 @@ To start running cypress tests we have 2 main options:
 
 2. Run the tests via CLI :
 
-    For example if you are trying to run all feature files under e2e folder
+    For example if you are trying to run 1 feature file you can execute:
     ```shell
-    npx cypress run --spec cypress/e2e/*.feature
+    npm run cy:test -- --spec cypress/e2e/features/frontend/createAccount.feature
     ```
-    Or if you trying to run only test with certain tags(i.e.: @smoke tag to run a smoke suite)
+    You can also run tests via tagging as per example:
     ```shell
-    npx cypress run --env TAGS="@smoke"
+    npm run cy:test --env tags="@regression"
+    npm run cy:test --env tags="@frontend and @smoke"
+    npm run cy:test --env tags="@e2e or @negative"
     ```
 ### Project structure
 
@@ -49,6 +53,7 @@ cypress
 |   |   pageOperations
 |   command.js
 |   e2e.js
+cucumber-json-formatter
 cypress.config.json
 cypress.env.json
 README.md

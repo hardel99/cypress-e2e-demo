@@ -30,3 +30,7 @@ cypress/screenshots
 
 #local variables file
 cypress.env.json
+*.ndjson
+cucumber-report/
+cucumber-json-formatter.*
+cucumber-json-formatter

@@ -1,15 +1,16 @@
 {
-  "name": "user-test",
   "title": "mr",
-  "email": "user-test@rvn.com",
-  "password": "passw0rd",
   "birthday": "1999-02-22",
+  "firstName": "dummy",
+  "lastName": "account",
+  "company": "company",
+  "mobileNumber": "(908) 678-5648",
   "address": {
-    "line1": "",
-    "line2": "",
-    "country": "",
-    "state": "",
-    "city": "",
-    "zipcode": ""
+    "line1": "address line 1",
+    "line2": "address line 2",
+    "country": "United States",
+    "state": "San Salvador",
+    "city": "San Salvador",
+    "zipcode": "1101"
   }
 }

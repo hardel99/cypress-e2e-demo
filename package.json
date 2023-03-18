@@ -1,11 +1,29 @@
 {
   "scripts": {
-    "cypress:test": "cypress run --spec cypress/e2e/*.feature"
+    "cy:cucumber-report": "node cucumber-html-report.js",
+    "cy:test": "npx cypress run --headed --browser chrome --env tags=\"not @ignore\"",
+    "cy:smoke": "npm run cy:test -- --env tags=\"not @ignore and @smoke\"",
+    "cy:test-all": "npm run cy:test --headless --spec cypress/e2e/features/**/*.feature && npm run cy:report"
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "cypress": "^12.7.0",
-    "esbuild": "^0.17.11"
+    "esbuild": "^0.17.11",
+    "multiple-cucumber-html-reporter": "^3.3.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "filterSpecs": true,
+    "omitFiltered": true,
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": [
+      "[filepath]/**/*.{js,ts}",
+      "[filepath].{js,ts}",
+      "cypress/e2e/step_definitions/*.js"
+    ],
+    "json": {
+      "enabled": true,
+      "output": "./cucumber-report/results.json"
+    }
   }
 }

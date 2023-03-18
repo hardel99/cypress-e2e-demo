@@ -10,12 +10,31 @@ Given('I navigate to the Website', () => {
     cy.visit('/');
 });
 
+Given('Create dummy account with {string}, {string} and {string}', (user, email, password) => {
+    //ideally this step is performed in the backend but we don't have access, so the hard way it is
+    login.signup(user, email);
+    cy.fixture('signupData.json').then(function(data){
+        createAccount.fillSignupDetails(data.title, user, email, password, data.birthday);
+        createAccount.fillAddressDetails(data.firstName, 
+                                    data.lastName, 
+                                    data.company, 
+                                    data.address.line1, 
+                                    data.address.line2, 
+                                    data.address.country, 
+                                    data.address.state, 
+                                    data.address.city, 
+                                    data.address.zipcode, 
+                                    data.mobileNumber);
+    });
+    createAccount.submitForm();
+    confirmAccount.verifyAccountIsSuccessfullyCreated();
+});
+
 When('Application Home Page is visible', () => {
     homePage.validateHomePageElements()
 });
 
 Then('Signup and create a new user with {string} and {string}', (user, email) => {
-    homePage.navigateToLoginPage();
     login.signup(user, email);
 });
 
@@ -52,3 +71,19 @@ Then('Delete account', () => {
     homePage.navigateToDeleteAccountnPage();
     confirmAccount.verifyAccountIsSuccessfullyDeleted();
 });
+
+Then('Go to Login Page', () => {
+    homePage.navigateToLoginPage();
+})
+
+Then('Verify user is not able to {string}', (action) => {
+    if(action === 'login') {
+        login.validateLoginErrorMessage();
+        login.validateUserIsInLoginScreen();
+    } else if(action === 'signup') {
+        login.validateSignupErrorMessage();
+        login.validateUserIsInLoginScreen(true);
+    } else{
+        throw new Error('Please provide a valid action("login" or "signup") for this step');
+    }
+})
