@@ -43,8 +43,8 @@ To start running cypress tests we have 2 main options:
     You can also run tests via tagging as per example:
     ```shell
     npm run cy:test --env tags="@regression"
-    npm run cy:test --env tags="@frontend and @smoke"
-    npm run cy:test --env tags="@e2e or @negative"
+    npm run cy:test --env tags="@regression or @smoke"
+    npm run cy:test --env tags="@e2e and @negative"
     ```
 ## Project structure
 

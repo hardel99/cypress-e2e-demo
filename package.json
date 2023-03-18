@@ -6,7 +6,7 @@
     "postcy:test": "npm run cy:report",
     "cy:smoke": "npm run cy:test -- --env tags=\"not @ignore and @smoke\"",
     "cy:regression": "npm run cy:test -- --env tags=\"not @ignore and @regression\"",
-    "cy:test-all": "npm run cy:test -- --config video=false,screenshotOnRunFailure=true --headless --spec cypress/e2e/**/features/*.feature"
+    "cy:test-all": "npx cypress run --browser chrome --env tags=\"not @ignore\" --config video=false,screenshotOnRunFailure=true --headless --spec cypress/e2e/**/features/*.feature"
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
