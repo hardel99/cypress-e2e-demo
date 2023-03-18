@@ -1,10 +1,10 @@
 ///<reference types="cypress"/>
 
 import { When, Then, Given } from "@badeball/cypress-cucumber-preprocessor";
-import confirmAccount from "../../support/pages/ConfirmAccount";
-import createAccount from "../../support/pages/CreateAccount";
-import homePage from "../../support/pages/HomePage";
-import login from "../../support/pages/Login";
+import confirmAccount from "../../../support/pages/ConfirmAccount";
+import createAccount from "../../../support/pages/CreateAccount";
+import homePage from "../../../support/pages/HomePage";
+import login from "../../../support/pages/Login";
 
 Given('I navigate to the Website', () => {
     cy.visit('/');
@@ -13,7 +13,7 @@ Given('I navigate to the Website', () => {
 Given('Create dummy account with {string}, {string} and {string}', (user, email, password) => {
     //ideally this step is performed in the backend but we don't have access, so the hard way it is
     login.signup(user, email);
-    cy.fixture('signupData.json').then(function(data){
+    cy.fixture('frontend/signupData.json').then(function(data){
         createAccount.fillSignupDetails(data.title, user, email, password, data.birthday);
         createAccount.fillAddressDetails(data.firstName, 
                                     data.lastName, 

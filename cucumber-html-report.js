@@ -1,25 +1,23 @@
 const report = require("multiple-cucumber-html-reporter");
 const os = require('os');
 
-function getOSName(os) {
-  let name = '';
-  switch(os) {
-    case 'win32':
-      name = 'windows';
-      break;
-    case 'darwin':
-      name = 'osx';
-      break;
-    case 'linux':
-      name = 'linux';
-      break;
-    case 'sunos':
-      name = 'linux';
-      break;
-    default:
-      name = 'unkown';
-  }
-  return name;
+
+let nameFormatted = '';
+switch(os.platform()) {
+  case 'win32':
+    nameFormatted = 'windows';
+    break;
+  case 'darwin':
+    nameFormatted = 'osx';
+    break;
+  case 'linux':
+    nameFormatted = 'linux';
+    break;
+  case 'sunos':
+    nameFormatted = 'linux';
+    break;
+  default:
+    nameFormatted = 'unkown';
 }
 
 report.generate({
@@ -31,7 +29,7 @@ report.generate({
     },
     device: "Local test machine",
     platform: {
-      name: getOSName(os.platform),
+      name: nameFormatted,
       version: os.release(),
     },
   },

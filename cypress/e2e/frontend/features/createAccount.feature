@@ -7,7 +7,7 @@ Feature: Create Account and Login
 Background:
     Given I navigate to the Website
 
-@regression @e2e @ignore
+@regression @e2e
 Scenario: Create a new account, login and delete it
     When Application Home Page is visible
     Then Go to Login Page
@@ -41,7 +41,7 @@ Examples:
     | non@exist.com | non-existantPass |
 
 
-@negative @ignore
+@negative @ignore @e2e @id5687678
 Scenario: SignUp with existing account credentials
     When Application Home Page is visible
     Then Go to Login Page
