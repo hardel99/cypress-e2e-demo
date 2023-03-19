@@ -6,6 +6,14 @@ const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esb
 module.exports = defineConfig({
     e2e: {
         async setupNodeEvents(on, config) {
+            on("task", {
+                log(message) {
+                  console.log(message);
+        
+                  return null;
+                },
+            });
+            
             const bundler = createBundler({
                 plugins: [createEsbuildPlugin(config)],
             });
@@ -17,8 +25,8 @@ module.exports = defineConfig({
         },
         baseUrl: "https://automationexercise.com/",
         specPattern: "cypress/e2e/**/features/*.feature",
-        viewportWidth: 1920,
-        viewportHeight: 1080,
+        viewportWidth: 1366,
+        viewportHeight: 768,
         defaultCommandTimeout: 5000,
         pageLoadTimeout: 60000,
         watchForFileChanges: false

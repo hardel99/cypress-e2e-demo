@@ -89,3 +89,16 @@ Cypress.Commands.add('verifyURLIncludes', (endpoint = '') => {
     const url = Cypress.config('baseUrl') + endpoint;
     cy.url().should('eq', url);
 });
+
+Cypress.Commands.add('printLog', (message) => {
+    cy.task('log', {message});
+});
+
+Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers = {}) => {
+    cy.request( {
+        method: $method,
+        url: Cypress.config('baseUrl') + endpoint,
+        body: payload,
+        headers: $headers
+    });
+});

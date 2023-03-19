@@ -1,3 +1,4 @@
+@frontend
 Feature: Create Account and Login
     """
     As a new user I want to be able to see products and menus of Home Page, 

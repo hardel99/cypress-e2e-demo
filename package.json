@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "cy:open": "npx cypress open",
+    "cy:open": "npx cypress open --config specPattern=\"cypress/e2e/frontend/features/*.feature\"",
+    "cy:open-api": "npx cypress open --config baseUrl=\"https://restful-booker.herokuapp.com\",specPattern=\"cypress/e2e/backend/features/*.feature\"",
     "cy:report": "node cucumber-html-report.js",
     "cy:test": "npx cypress run --headed --browser chrome --env tags=\"not @ignore\"",
     "postcy:test": "npm run cy:report",
