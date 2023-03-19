@@ -29,7 +29,7 @@ class BookingOperations {
             request.firstname = request.firstname.concat(' ', randomString); 
             request.lastname = request.lastname.concat(' ', randomString); 
             request.totalprice = Math.floor(Math.random() * 100);
-            
+        }).then(() => {
             cy.sendRequest('POST', '/booking', request).as('response');
         });
 

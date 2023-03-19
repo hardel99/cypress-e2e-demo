@@ -7,7 +7,9 @@ import utils from "../../../support/utils";
 Given('Create a booking', function() {
     //booking.createRequest().then((request) => { this.request = request; });
     //booking.createBooking(this.request).then((data) => { this.response = data });
-    booking.createBooking().then((data) => { this.response = data });
+    booking.createBooking().then(data => { 
+        this.response = data; 
+    });
 });
 
 Then('Validate response is successfull', function() {

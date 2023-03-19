@@ -100,6 +100,7 @@ Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers =
         url: Cypress.config('baseUrl') + endpoint,
         body: payload,
         headers: $headers,
-        qs: query
-    }).then(data => { cy.printLog(data) });
+        qs: query,
+        log: true,
+    });
 });
