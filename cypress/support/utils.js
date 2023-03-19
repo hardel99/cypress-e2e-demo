@@ -14,7 +14,8 @@ class Utils {
         }
         return result;
     }
-    verifyResponseStatusCode() {
+
+    verifyResponseStatusCode(response, statusCode) {
         expect(response.status).to.eq(statusCode);
     }
 

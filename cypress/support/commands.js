@@ -94,11 +94,12 @@ Cypress.Commands.add('printLog', (message) => {
     cy.task('log', {message});
 });
 
-Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers = {}) => {
+Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers = {}, query = {}) => {
     cy.request( {
         method: $method,
         url: Cypress.config('baseUrl') + endpoint,
         body: payload,
-        headers: $headers
-    });
+        headers: $headers,
+        qs: query
+    }).then(data => { cy.printLog(data) });
 });
