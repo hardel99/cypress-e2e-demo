@@ -5,10 +5,12 @@ import booking from "../../../support/operations/BookingOperations";
 import utils from "../../../support/utils";
 
 Given('Create a booking', function() {
-    //booking.createRequest().then((request) => { this.request = request; });
-    //booking.createBooking(this.request).then((data) => { this.response = data });
-    booking.createBooking().then(data => { 
-        this.response = data; 
+    booking.createRequest().then((request) => { 
+        this.request = request; 
+    }).then(() => {
+        booking.createBooking(this.request).then(data => { 
+            this.response = data; 
+        });
     });
 });
 

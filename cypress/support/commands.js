@@ -101,6 +101,8 @@ Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers =
         body: payload,
         headers: $headers,
         qs: query,
-        log: true,
+    }).then(response => {
+        cy.printLog(response);
+        return cy.wrap(response);
     });
 });
