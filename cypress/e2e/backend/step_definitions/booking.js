@@ -5,8 +5,8 @@ import booking from "../../../support/operations/BookingOperations";
 import utils from "../../../support/utils";
 
 Given('Authenticate and save headers', function() {
-    /* ideally you generate a token by calling an auth endpoint and save it to an env variable
-    but since this is just a demo the value from the api documentation is hardcoded  */
+    // ideally you generate a token by calling an auth endpoint and save it to an env variable
+    // but since this is just a demo the value from the api documentation is hardcoded 
     Cypress.env('token', 'abc123');
     Cypress.env('authorization', 'Basic YWRtaW46cGFzc3dvcmQxMjM=');
 });
@@ -22,9 +22,22 @@ Given('Create a booking', function() {
     });
 });
 
-Then('Validate response is successfull', function() {
-    utils.verifyResponseStatusCode(this.response, 200);
-    expect(this.bookingID).to.not.be.oneOf([null, '', undefined]);
+Given('Create a booking with empty payload', function() {
+    booking.createBooking(this.request).then(data => { 
+        this.response = data;
+        this.bookingID = this.response.body.bookingid;
+    });
+});
+
+Then('Validate response is {string}', function(state) {
+    if(state === 'successfull') {
+        utils.verifyResponseStatusCode(this.response, 200);
+        expect(this.bookingID).to.not.be.oneOf([null, '', undefined]);
+    } else{
+        utils.verifyResponseStatusCode(this.response, 500);
+        expect(this.bookingID).to.be.oneOf([null, '', undefined]);
+        expect(this.response.body).to.eq('Internal Server Error');
+    }
 });
 
 When('Get the new booking', function() {

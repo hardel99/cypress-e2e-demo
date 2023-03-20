@@ -11,11 +11,11 @@ Background: Auth preparation
 @smoke @sanity
 Scenario: Create a booking, retrieve it and modify it
     Given Create a booking
-    Then Validate response is successfull
+    Then Validate response is "successfull"
     When Get the new booking
     Then Validate response content
     When Update booking "additionalneeds" value with "<updatedValue>"
-    Then Validate response is successfull
+    Then Validate response is "successfull"
     When Get the new booking
     Then Validate response content
 
@@ -23,3 +23,7 @@ Examples:
     |       updatedValue      |
     | Aditional needs Updated |
 
+@negative @ignore
+Scenario: Create a booking without payload
+    Given Create a booking with empty payload
+    Then Validate response is "failed"

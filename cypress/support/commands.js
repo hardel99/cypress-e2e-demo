@@ -97,6 +97,7 @@ Cypress.Commands.add('printLog', (message) => {
 Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers = {}, query = {}) => {
     cy.request( {
         method: $method,
+        failOnStatusCode: false,
         url: Cypress.config('baseUrl') + endpoint,
         body: payload,
         headers: $headers,
