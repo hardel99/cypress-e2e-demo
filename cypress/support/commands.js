@@ -53,6 +53,16 @@ Cypress.Commands.add('checkElement', (locator) => {
     cy.get(locator).should('be.checked');
 });
 
+Cypress.Commands.add('findElement', (parentLocator, childLocator, fn) => {
+    if(typeof(fn) === 'function') {
+        cy.get(parentLocator).find(childLocator).each(($el, index, $list) => {
+            fn($el, index, $list);
+        });
+    } else {
+        cy.get(parentLocator).find(childLocator);
+    }
+});
+
 Cypress.Commands.add('verifyElementExist', (locator) => {
     cy.get(locator).should('exist').and('be.visible');
 });

@@ -15,8 +15,8 @@ Given('Authenticate and prepare data', function() {
 });
 
 Given('Create a booking', function() {
-    booking.createBooking(this.request).then(data => { 
-        this.response = data; 
+    booking.createBooking(this.request).then(response => { 
+        this.response = response; 
         this.bookingID = this.response.body.bookingid;
     });
 });
@@ -26,7 +26,7 @@ Then('Validate response is {string}', function(state) {
 });
 
 When('Get the new booking', function() {
-    booking.getBooking(this.bookingID).then((data) => { this.response = data });
+    booking.getBooking(this.bookingID).then((response) => { this.response = response });
 });
 
 Then('Validate response content', function() {
@@ -36,13 +36,7 @@ Then('Validate response content', function() {
 When('Update booking {string} value with {string}', function(key, value) {
     this.request[key] = value;
     cy.setCookie('token', Cypress.env('token'));
-    booking.updateBooking(this.bookingID, this.request).then(data => {
-        this.response = data;
+    booking.updateBooking(this.bookingID, this.request).then(response => {
+        this.response = response;
     });
 });
-
-//TODO:
-// update readme with element identification section
-// best practices
-// update guide for backend integration
-// create anpther variable for baseURL endpoints

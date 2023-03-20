@@ -32,7 +32,7 @@ module.exports = defineConfig({
         pageLoadTimeout: 60000,
         watchForFileChanges: false,
         retries: {
-            runMode: 3,
+            runMode: 2,
             openMode: 0,
         },
     },

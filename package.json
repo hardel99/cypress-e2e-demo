@@ -6,6 +6,7 @@
     "cy:test": "npx cypress run --headed --browser chrome --env tags=\"not @ignore\"",
     "postcy:test": "npm run cy:report",
     "cy:smoke": "npm run cy:test -- --env tags=\"not @ignore and @smoke\"",
+    "cy:sanity": "npm run cy:test -- --env tags=\"not @ignore and @sanity\"",
     "cy:regression": "npm run cy:test -- --env tags=\"not @ignore and @regression\"",
     "cy:test-all": "npx cypress run --browser chrome --env tags=\"not @ignore\" --config video=false,screenshotOnRunFailure=true --headless --spec cypress/e2e/**/features/*.feature"
   },

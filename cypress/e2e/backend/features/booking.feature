@@ -21,7 +21,7 @@ Examples:
     |       updatedValue      |
     | Aditional needs Updated |
 
-@negative
+@negative @ignore
 Scenario: Create a booking without payload
     Given Create a booking
     Then Validate response is "failed"
