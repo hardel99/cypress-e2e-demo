@@ -15,6 +15,10 @@ class Utils {
         return result;
     }
 
+    verifyResponseStatusCode(response, statusCode) {
+        expect(response.status).to.eq(statusCode);
+    }
+
     parseStringToDate(dateString, dateFormat = 'yyyy/mm/dd') {
         const splittedValues = dateString.split(/[-|\/]/g);
         

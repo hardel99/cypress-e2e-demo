@@ -53,6 +53,16 @@ Cypress.Commands.add('checkElement', (locator) => {
     cy.get(locator).should('be.checked');
 });
 
+Cypress.Commands.add('findElement', (parentLocator, childLocator, fn) => {
+    if(typeof(fn) === 'function') {
+        cy.get(parentLocator).find(childLocator).each(($el, index, $list) => {
+            fn($el, index, $list);
+        });
+    } else {
+        cy.get(parentLocator).find(childLocator);
+    }
+});
+
 Cypress.Commands.add('verifyElementExist', (locator) => {
     cy.get(locator).should('exist').and('be.visible');
 });
@@ -88,4 +98,22 @@ Cypress.Commands.add('verifyElementTextByContains', (locator, text, ignoreCases=
 Cypress.Commands.add('verifyURLIncludes', (endpoint = '') => {
     const url = Cypress.config('baseUrl') + endpoint;
     cy.url().should('eq', url);
+});
+
+Cypress.Commands.add('printLog', (message) => {
+    cy.task('log', {message});
+});
+
+Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers = {}, query = {}) => {
+    cy.request( {
+        method: $method,
+        failOnStatusCode: false,
+        url: Cypress.config('baseAPIUrl') + endpoint,
+        body: payload,
+        headers: $headers,
+        qs: query,
+    }).then(response => {
+        cy.printLog(response);
+        return cy.wrap(response);
+    });
 });

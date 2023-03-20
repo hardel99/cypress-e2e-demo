@@ -1,3 +1,4 @@
+@frontend
 Feature: Create Account and Login
     """
     As a new user I want to be able to see products and menus of Home Page, 
@@ -41,7 +42,7 @@ Examples:
     | non@exist.com | non-existantPass |
 
 
-@negative @ignore @e2e
+@negative @ignore @e2e @sanity
 Scenario: SignUp with existing account credentials
     When Application Home Page is visible
     Then Go to Login Page
@@ -57,7 +58,7 @@ Examples:
     | temp-user | temp@cypress-user.com | passw0rd |
 
 
-@smoke @ignore
+@smoke @ignore @sanity
 Scenario: Login with existing user
     When Application Home Page is visible
     Then Go to Login Page
