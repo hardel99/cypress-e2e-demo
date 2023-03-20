@@ -3,7 +3,7 @@
 import utils from "../utils";
 
 class BookingOperations {
-    createRequest() {
+    createPayloadRequest() {
         let request = {};
         const randomString = utils.getRandomString(4);
 
@@ -20,12 +20,22 @@ class BookingOperations {
         return cy.get('@request');
     }
 
-    createBooking(request) {
-        return cy.sendRequest('POST', '/booking', request)
+    createBooking(payload) {
+        return cy.sendRequest('POST', '/booking', payload)
     }
 
     getBooking(id) {
         return cy.sendRequest('GET', `/booking/${id}`);
+    }
+
+    updateBooking(id, payload) {
+        return cy.sendRequest('PUT', `/booking/${id}`, payload, {
+            authorization: Cypress.env('authorization')
+        });
+    }
+
+    validateResponseMatches(request, response) {
+        expect(response.body).to.deep.equal(request);
     }
 }
 
