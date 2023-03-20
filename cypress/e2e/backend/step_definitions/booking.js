@@ -4,40 +4,25 @@ import { When, Then, Given } from "@badeball/cypress-cucumber-preprocessor";
 import booking from "../../../support/operations/BookingOperations";
 import utils from "../../../support/utils";
 
-Given('Authenticate and save headers', function() {
+Given('Authenticate and prepare data', function() {
     // ideally you generate a token by calling an auth endpoint and save it to an env variable
     // but since this is just a demo the value from the api documentation is hardcoded 
     Cypress.env('token', 'abc123');
     Cypress.env('authorization', 'Basic YWRtaW46cGFzc3dvcmQxMjM=');
-});
-
-Given('Create a booking', function() {
     booking.createPayloadRequest().then((request) => { 
         this.request = request; 
-    }).then(() => {
-        booking.createBooking(this.request).then(data => { 
-            this.response = data; 
-            this.bookingID = this.response.body.bookingid;
-        });
     });
 });
 
-Given('Create a booking with empty payload', function() {
+Given('Create a booking', function() {
     booking.createBooking(this.request).then(data => { 
-        this.response = data;
+        this.response = data; 
         this.bookingID = this.response.body.bookingid;
     });
 });
 
 Then('Validate response is {string}', function(state) {
-    if(state === 'successfull') {
-        utils.verifyResponseStatusCode(this.response, 200);
-        expect(this.bookingID).to.not.be.oneOf([null, '', undefined]);
-    } else{
-        utils.verifyResponseStatusCode(this.response, 500);
-        expect(this.bookingID).to.be.oneOf([null, '', undefined]);
-        expect(this.response.body).to.eq('Internal Server Error');
-    }
+    booking.validateResponseIs(state, this.response, this.bookingID);
 });
 
 When('Get the new booking', function() {
@@ -60,3 +45,4 @@ When('Update booking {string} value with {string}', function(key, value) {
 // update readme with element identification section
 // best practices
 // update guide for backend integration
+// create anpther variable for baseURL endpoints

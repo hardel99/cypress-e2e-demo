@@ -98,7 +98,7 @@ Cypress.Commands.add('sendRequest', ($method, endpoint, payload = {}, $headers =
     cy.request( {
         method: $method,
         failOnStatusCode: false,
-        url: Cypress.config('baseUrl') + endpoint,
+        url: Cypress.config('baseAPIUrl') + endpoint,
         body: payload,
         headers: $headers,
         qs: query,

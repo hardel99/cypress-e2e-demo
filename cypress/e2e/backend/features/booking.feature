@@ -5,11 +5,9 @@ Feature: Validate Booking API
     and modifying the booking details
     """
 
-Background: Auth preparation
-    Given Authenticate and save headers
-
 @smoke @sanity
 Scenario: Create a booking, retrieve it and modify it
+    Given Authenticate and prepare data
     Given Create a booking
     Then Validate response is "successfull"
     When Get the new booking
@@ -23,7 +21,7 @@ Examples:
     |       updatedValue      |
     | Aditional needs Updated |
 
-@negative @ignore
+@negative
 Scenario: Create a booking without payload
-    Given Create a booking with empty payload
+    Given Create a booking
     Then Validate response is "failed"

@@ -34,6 +34,19 @@ class BookingOperations {
         });
     }
 
+    validateResponseIs(state, response, id) {
+        let statusCode;
+        if(state === 'successfull') {
+            statusCode = 200;
+            expect(id).to.not.be.oneOf([null, '', undefined]);
+        } else{
+            statusCode = 500;
+            expect(id).to.be.oneOf([null, '', undefined]);
+            expect(response.body).to.eq('Internal Server Error');
+        }
+        utils.verifyResponseStatusCode(response, statusCode);
+    }
+
     validateResponseMatches(request, response) {
         expect(response.body).to.deep.equal(request);
     }

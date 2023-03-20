@@ -24,11 +24,16 @@ module.exports = defineConfig({
             return config;
         },
         baseUrl: "https://automationexercise.com/",
+        baseAPIUrl: "https://restful-booker.herokuapp.com",  //this should NOT happen in a normal scenario but since there are 2 different applications under test it was specified another baseURL
         specPattern: "cypress/e2e/**/features/*.feature",
         viewportWidth: 1366,
         viewportHeight: 768,
-        defaultCommandTimeout: 5000,
+        defaultCommandTimeout: 10000,
         pageLoadTimeout: 60000,
-        watchForFileChanges: false
+        watchForFileChanges: false,
+        retries: {
+            runMode: 3,
+            openMode: 0,
+        },
     },
 });
